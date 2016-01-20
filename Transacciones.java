@@ -1,84 +1,41 @@
 package cajero.automatico;
 
-public class Cuenta extends Transacciones { // Creacion de una clase "Cuenta" que hereda de Operaciones
+public abstract class Transacciones {
 
-    private int ultMovimiento = 0;
-//Atributo de tipo privado usado para la contraseña de la cuenta 
+    protected String nombre;
+    protected double saldo;
+    protected String nroCuenta;
+    protected String password;
+//Atributos a utilizar
 
-    public Cuenta(String nombre, double saldo, String nroCuenta, String password) {
-        super(nombre, saldo, nroCuenta, password);
-    }
-
-    Cuenta() {
-
-    }
-
-//Constructor de la clase cuenta que inicializa primero al de la clase padre
-    public void setSaldo(double saldo) {
-        this.saldo = saldo;
-    }
-
-    public double getSaldo() {
-
-        return saldo;
-    }
-
-    public void setnroCuenta(String nroCuenta) {
-        this.nroCuenta = nroCuenta;
-    }
-
-    public String getnroCuenta() {
-
-        return nroCuenta;
-    }
-
-    public void setNombre(String nombre) {
+    public Transacciones(String nombre, double saldo, String nroCuenta, String password) {
         this.nombre = nombre;
-    }
-
-    public String getNombre() {
-
-        return nombre;
-    }
-
-    public void setPassoword(String password) {
+        this.saldo = saldo;
+        this.nroCuenta = nroCuenta;
         this.password = password;
     }
 
-    public String getPassword() {
-
-        return password;
+    public Transacciones() {
+        this.nombre = null;
+        this.saldo = 0;
+        this.nroCuenta = null;
+        this.password = null;
     }
 
-//propiedades de lectura que usaremos en la principal
-    @Override
-    public boolean Retiro(double cantidad) {
-        double total = cantidad + 0.35;
-        if (super.saldo >= total) {
-            super.saldo = super.saldo - total;
-            System.out.println("Su saldo nuevo es: " + super.saldo);
-            System.out.println("==================================");
-            return true;
-        } else {
-            System.out.println("Saldo Insuficiente");
-            return false;
-        }
-    }//Fin de metodo Retiro
-
-    @Override
-    public void Consulta(String direccion) {
-        System.out.println("==================================");
-        System.out.println("Sr(a): " + super.nombre);
-        System.out.println("Su saldo es: " + super.saldo);
-        System.out.println("Nro Cuenta: " + super.nroCuenta);
-        System.out.println("==================================");
-
-    }//Fin del metodo Consulta
-
-    @Override
-    public boolean CambioClave(double pass) {
-        double contrasena = pass;
-
-        return true;
+    public Transacciones(String nombre) {
+        this.nombre = nombre;
+        this.saldo = 500.99;
     }
-}//Fin de metodo Retir
+//Sobrecarga de constructores solo el primero vamos a utilizar los demás solo.
+//se han creado para demostrar el principio de sobrecarga.
+
+    public abstract boolean Retiro(double Cantidad);
+    
+
+    public abstract boolean CambioClave(double Cantidad);
+
+    public abstract void Consulta(String direccion);
+    
+   
+//Métodos abstractos
+}
